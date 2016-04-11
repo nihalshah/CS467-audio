@@ -1,8 +1,8 @@
 
-/*
-var diff = resemble("images/Image-1.png").compareTo("images/Image-2.png").ignoreColors().onComplete(function(data){
+    /*
+var diff = resemble("images/Image-1.png").compareTo("images/Image-2.png").onComplete(function(data){
     console.log(data);
-    
+
     {
       misMatchPercentage : 100, // %
       isSameDimensions: true, // or false
@@ -11,23 +11,25 @@ var diff = resemble("images/Image-1.png").compareTo("images/Image-2.png").ignore
     }
     
 });
-
-diff.scaleToSameSize();
-diff.ignoreColors();
 */
+
+
 resemble.outputSettings({
   errorColor: {
     red: 255,
     green: 0,
     blue: 255
   },
-  errorType: 'flat',
-  transparency: 1.0,
+  errorType: 'movement',
+  transparency: 0.3,
   largeImageThreshold: 1200
 });
 
 
+
+
 	function onComplete(data){
+		
 		var time = Date.now();
 		var diffImage = new Image();
 		diffImage.src = data.getImageDataUrl();
@@ -40,10 +42,10 @@ resemble.outputSettings({
 
 			$('#diff-results').show();
 
-
+		
 		}
 	
 
 
-var resembleControl = resemble("images/Image-1.png").compareTo("images/Image-2.png").ignoreNothing().onComplete(onComplete);
-resembleControl.repaint();
+var resembleControl = resemble("images/Image-1.png").compareTo("images/Image-2.png").onComplete(onComplete);
+//resembleControl.repaint();

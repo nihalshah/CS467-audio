@@ -21,31 +21,50 @@ resemble.outputSettings({
     blue: 255
   },
   errorType: 'movement',
-  transparency: 0.3,
+  transparency: 1.0,
   largeImageThreshold: 1200
 });
 
 
+	var diffImage =  new Image();
+	var diffImage2 = new Image();
+	var diffImage3 = new Image();
 
-
-	function onComplete(data){
-		
-		var time = Date.now();
-		var diffImage = new Image();
-		diffImage.src = data.getImageDataUrl();
-
-		$('#image-diff').html(diffImage);
-
-		$(diffImage).click(function(){
-			window.open(diffImage.src, '_blank');
-		});
-
-			$('#diff-results').show();
-
-		
+		function onComplete3(){
+		var resembleControl = resemble(diffImage.src).compareTo(diffImage2.src).ignoreAntialiasing().onComplete(onComplete4);
 		}
+
+	    var onComplete = function(data){
+		diffImage.src = data.getImageDataUrl();
+		$('#image-diff').html(diffImage);			
+		}
+
+	    var onComplete2 = function(data){
+		diffImage2.src = data.getImageDataUrl();
+		$('#image-diff2').html(diffImage2);
+		onComplete3()
+		}
+
+		var onComplete4 = function(data){
+		diffImage3.src = data.getImageDataUrl();
+		$('#image-diff3').html(diffImage3);
+					
+		}
+
+
+		/*
+		var time = Date.now();
+
+		diffImage3.src = data.getImageDataUrl();
+
+		$('#image-diff3').html(diffImage3);
+*/
+				
+		
 	
 
 
-var resembleControl = resemble("images/Image-1.png").compareTo("images/Image-2.png").onComplete(onComplete);
+var resembleControl = resemble("images/Image-1.png").compareTo("images/Image-2.png").ignoreAntialiasing().onComplete(onComplete);
+var resembleControl2 = resemble("images/Image-3.png").compareTo("images/Image-4.png").ignoreAntialiasing().onComplete(onComplete2);
+
 //resembleControl.repaint();
